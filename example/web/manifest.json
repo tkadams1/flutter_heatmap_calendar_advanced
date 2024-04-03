@@ -1,6 +1,6 @@
 {
-    "name": "example",
-    "short_name": "example",
+    "name": "heatmap_calendar_advanced",
+    "short_name": "heatmap_calendar_advanced",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

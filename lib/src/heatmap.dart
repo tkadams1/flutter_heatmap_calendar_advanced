@@ -81,6 +81,8 @@ class HeatMap extends StatefulWidget {
   /// Give null value makes default 'less' and 'more' [Text].
   final List<Widget?>? colorTipHelper;
 
+  final MainAxisAlignment? colorTipAlignment;
+
   /// The integer value which represents the number of [HeatMapColorTip]'s tip container.
   final int? colorTipCount;
 
@@ -105,6 +107,7 @@ class HeatMap extends StatefulWidget {
     this.showColorTip = true,
     this.scrollable = false,
     this.colorTipHelper,
+    this.colorTipAlignment,
     this.colorTipCount,
     this.colorTipSize,
   }) : super(key: key);
@@ -129,6 +132,7 @@ class _HeatMap extends State<HeatMap> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         // Heatmap Widget.
         _scrollableHeatMap(HeatMapPage(
@@ -156,6 +160,7 @@ class _HeatMap extends State<HeatMap> {
             leftWidget: widget.colorTipHelper?[0],
             rightWidget: widget.colorTipHelper?[1],
             containerCount: widget.colorTipCount,
+            alignment: widget.colorTipAlignment,
             size: widget.colorTipSize,
           ),
       ],

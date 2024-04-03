@@ -32,6 +32,8 @@ class HeatMapColorTip extends StatelessWidget {
   /// The integer value of color tip containers count.
   final int? containerCount;
 
+  final MainAxisAlignment? alignment;
+
   /// The double value of tip container's size.
   final double? size;
 
@@ -41,6 +43,7 @@ class HeatMapColorTip extends StatelessWidget {
     this.colorsets,
     this.leftWidget,
     this.rightWidget,
+    this.alignment,
     this.containerCount,
     this.size,
   }) : super(key: key);
@@ -105,7 +108,7 @@ class HeatMapColorTip extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: alignment ?? MainAxisAlignment.end,
         children: <Widget>[
           leftWidget ?? _defaultText('less'),
           ..._heatmapList(),
