@@ -56,6 +56,10 @@ class DateUtil {
   static DateTime oneYearBefore(final DateTime referenceDate) =>
       DateTime(referenceDate.year - 1, referenceDate.month, referenceDate.day);
 
+  /// Get exactly one year before of [referenceDate].
+  static DateTime yearToDate(final DateTime referenceDate) =>
+      DateTime(referenceDate.year, 1, 1);
+
   /// Separate [referenceDate]'s month to List of every weeks.
   static List<Map<DateTime, DateTime>> separatedMonth(
       final DateTime referenceDate) {

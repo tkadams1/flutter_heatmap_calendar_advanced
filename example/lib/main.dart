@@ -106,14 +106,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            HeatMap(
-              startDate: DateTime.now().subtract(const Duration(days: 365)),
-              endDate: DateTime.now(),
+            HeatMapCalendarYear(
+              selectedYear: 2020,
+              earliestYearToDisplay:2019,
               //monthFontSize: 24,
               datasets: {DateTime.now(): 1},
               //flexible: true,
               showText: true,
               scrollable: true,
+              pastOnly: true,
               showColorTip: true,
               defaultColor: Colors.grey[200]!,
               //size: 20,
