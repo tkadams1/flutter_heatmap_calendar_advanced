@@ -115,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showText: true,
               scrollable: true,
               pastOnly: true,
+              staticWeekdayLabels: true,
               showColorTip: true,
               defaultColor: Colors.grey[200]!,
               //size: 20,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import './widget/heatmap_page.dart';
 import './widget/heatmap_color_tip.dart';
+import './widget/heatmap_week_text.dart';
 import './data/heatmap_color_mode.dart';
 import './util/date_util.dart';
 
 class HeatMapCalendarYear extends StatefulWidget {
- 
-   /// The Date value of start day of heatmap.
+  /// The Date value of start day of heatmap.
   ///
   /// HeatMap shows the start day of [startDate]'s week.
   ///
@@ -80,6 +80,8 @@ class HeatMapCalendarYear extends StatefulWidget {
 
   final bool pastOnly;
 
+  final bool staticWeekdayLabels;
+
   /// Widgets which shown at left and right side of colorTip.
   ///
   /// First value is the left side widget and second value is the right side widget.
@@ -121,6 +123,7 @@ class HeatMapCalendarYear extends StatefulWidget {
     this.colorTipSize,
     this.heatMapInitialYear,
     this.pastOnly = false,
+    this.staticWeekdayLabels = true,
   }) : super(key: key);
   @override
   _HeatMapCalendarYearState createState() => _HeatMapCalendarYearState();
@@ -144,29 +147,43 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
           )
         : child;
   }
+
   @override
   Widget build(BuildContext context) {
-     return Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         // Heatmap Widget.
         _header(),
-        _scrollableHeatMap(HeatMapPage(
-          endDate: selectedYear == DateTime.now().year ? DateTime.now() : DateTime(selectedYear, 12, 31),
-          startDate: DateTime(selectedYear, 1, 1),
-          colorMode: widget.colorMode,
-          size: widget.size,
-          fontSize: widget.fontSize,
-          datasets: widget.datasets,
-          defaultColor: widget.defaultColor,
-          textColor: widget.textColor,
-          colorsets: widget.colorsets,
-          borderRadius: widget.borderRadius,
-          onClick: widget.onClick,
-          margin: widget.margin,
-          showText: widget.showText,
-        )),
+        Row(
+          children: [
+            //This puts the week labels to the left of the heatmap regardless of scroll position
+            _staticWeekDayLabels(),
+            Expanded(
+              child: Container(
+                child: _scrollableHeatMap(HeatMapPage(
+                  endDate: selectedYear == DateTime.now().year
+                      ? DateTime.now()
+                      : DateTime(selectedYear, 12, 31),
+                  startDate: DateTime(selectedYear, 1, 1),
+                  colorMode: widget.colorMode,
+                  size: widget.size,
+                  fontSize: widget.fontSize,
+                  datasets: widget.datasets,
+                  defaultColor: widget.defaultColor,
+                  textColor: widget.textColor,
+                  colorsets: widget.colorsets,
+                  borderRadius: widget.borderRadius,
+                  onClick: widget.onClick,
+                  margin: widget.margin,
+                  showText: widget.showText,
+                  staticWeekdayLabels: widget.staticWeekdayLabels,
+                )),
+              ),
+            ),
+          ],
+        ),
 
         // Show HeatMapColorTip if showColorTip is true.
         if (widget.showColorTip == true)
@@ -188,15 +205,15 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         // Previous month button.
-       _buildPastIconButton(),
+        _buildPastIconButton(),
 
         // Text which shows the current year and month
-        Text((selectedYear).toString(),
+        Text(
+          (selectedYear).toString(),
           style: TextStyle(
             fontSize: widget.yearFontSize ?? 12,
           ),
         ),
-       
 
         // Next month button.
         _buildForwardIconButton(),
@@ -210,49 +227,58 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
     });
   }
 
+  Widget _staticWeekDayLabels() {
+    return widget.staticWeekdayLabels
+        ? HeatMapWeekText(
+            margin: widget.margin,
+            fontSize: widget.fontSize,
+            size: widget.size,
+            fontColor: widget.textColor,
+          )
+        : const SizedBox.shrink();
+  }
+
   Widget _buildForwardIconButton() {
-    if(widget.pastOnly && DateTime.now().year == selectedYear) {
+    if (widget.pastOnly && DateTime.now().year == selectedYear) {
       return const Opacity(
         opacity: 0.0,
         child: IconButton(
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-            ),
-            onPressed: null,
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            size: 14,
           ),
-
+          onPressed: null,
+        ),
       );
     }
     return IconButton(
-        icon: const Icon(
-          Icons.arrow_forward_ios,
-          size: 14,
-        ),
-        onPressed: () => _changeYear(selectedYear + 1),
-      );
+      icon: const Icon(
+        Icons.arrow_forward_ios,
+        size: 14,
+      ),
+      onPressed: () => _changeYear(selectedYear + 1),
+    );
   }
 
   Widget _buildPastIconButton() {
-    if( widget.earliestYearToDisplay == selectedYear) {
+    if (widget.earliestYearToDisplay == selectedYear) {
       return const Opacity(
         opacity: 0.0,
         child: IconButton(
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-            ),
-            onPressed: null,
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            size: 14,
           ),
-
+          onPressed: null,
+        ),
       );
     }
     return IconButton(
-        icon: const Icon(
-          Icons.arrow_back_ios,
-          size: 14,
-        ),
-        onPressed: () => _changeYear(selectedYear - 1),
-      );
+      icon: const Icon(
+        Icons.arrow_back_ios,
+        size: 14,
+      ),
+      onPressed: () => _changeYear(selectedYear - 1),
+    );
   }
 }

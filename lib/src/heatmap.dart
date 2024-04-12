@@ -74,6 +74,8 @@ class HeatMap extends StatefulWidget {
   /// default value is false.
   final bool scrollable;
 
+  final bool staticWeekdayLabels;
+
   /// Widgets which shown at left and right side of colorTip.
   ///
   /// First value is the left side widget and second value is the right side widget.
@@ -110,6 +112,7 @@ class HeatMap extends StatefulWidget {
     this.colorTipAlignment,
     this.colorTipCount,
     this.colorTipSize,
+    this.staticWeekdayLabels = true,
   }) : super(key: key);
 
   @override
@@ -150,6 +153,7 @@ class _HeatMap extends State<HeatMap> {
           onClick: widget.onClick,
           margin: widget.margin,
           showText: widget.showText,
+          staticWeekdayLabels: widget.staticWeekdayLabels,
         )),
 
         // Show HeatMapColorTip if showColorTip is true.
