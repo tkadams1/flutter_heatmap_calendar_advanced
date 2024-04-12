@@ -106,6 +106,26 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // HeatMapCalendar(
+            //   colorsets: const {
+            //     1: Color.fromARGB(20, 251, 43, 28),
+            //     2: Color.fromARGB(40, 251, 43, 28),
+            //     3: Color.fromARGB(60, 251, 43, 28),
+            //     4: Color.fromARGB(80, 251, 43, 28),
+            //     5: Color.fromARGB(100, 251, 43, 28),
+            //     6: Color.fromARGB(120, 251, 43, 28),
+            //     7: Color.fromARGB(150, 251, 43, 28),
+            //     8: Color.fromARGB(180, 251, 43, 28),
+            //     9: Color.fromARGB(210, 251, 43, 28),
+            //     10: Color.fromARGB(255, 251, 43, 28),
+            //   },
+            //   datasets:{DateTime.now(): 1}, 
+            //   initDate: DateTime.now(), 
+            //   showColorTip: true, colorTipHelper: 
+            //   [Text("Low Intensity"), Text("High Intensity")], 
+            //   colorTipCount: 10, colorTipSize: 20, 
+            //   onMonthChange: (value) {
+            //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.toString())));},),
             HeatMapCalendarYear(
               selectedYear: 2020,
               earliestYearToDisplay:2019,
@@ -113,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
               datasets: {DateTime.now(): 1},
               //flexible: true,
               showText: true,
-              scrollable: true,
+              scrollable: false,
               pastOnly: true,
               staticWeekdayLabels: true,
               showColorTip: true,
@@ -143,21 +163,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     .showSnackBar(SnackBar(content: Text(value.toString())));
               },
             ),
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            // const Text(
+            //   'You have pushed the button this many times:',
+            // ),
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headlineMedium,
+            // ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

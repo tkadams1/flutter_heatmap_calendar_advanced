@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../data/heatmap_color.dart';
 
 class HeatMapContainer extends StatelessWidget {
+  final DateTime earliestHeatMapDate;
   final DateTime date;
   final double? size;
   final double? fontSize;
@@ -15,6 +16,7 @@ class HeatMapContainer extends StatelessWidget {
 
   const HeatMapContainer({
     Key? key,
+    required this.earliestHeatMapDate,
     required this.date,
     this.margin,
     this.size,
@@ -29,6 +31,19 @@ class HeatMapContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return date.isBefore(earliestHeatMapDate)
+        ? _buildEmptyHeatMapContainer()
+        : _buildHeatMapContainer();
+  }
+
+  Widget _buildEmptyHeatMapContainer() {
+    return Container(
+        margin: margin ?? const EdgeInsets.all(2),
+        width: size ?? 42,
+        height: size ?? 42);
+  }
+
+  Widget _buildHeatMapContainer() {
     return Padding(
       padding: margin ?? const EdgeInsets.all(2),
       child: GestureDetector(

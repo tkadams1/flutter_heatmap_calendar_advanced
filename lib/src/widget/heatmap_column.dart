@@ -16,6 +16,10 @@ class HeatMapColumn extends StatelessWidget {
   /// It only processes when given week's length is not 7.
   final List<Widget> emptySpace;
 
+
+  /// The Date value of the earliest date of the heatmap.
+  final DateTime earliestHeatMapDate;
+
   /// The date value of first day of given week.
   final DateTime startDate;
 
@@ -75,6 +79,7 @@ class HeatMapColumn extends StatelessWidget {
 
   HeatMapColumn({
     Key? key,
+    required this.earliestHeatMapDate,
     required this.startDate,
     required this.endDate,
     required this.colorMode,
@@ -95,6 +100,7 @@ class HeatMapColumn extends StatelessWidget {
         dayContainers = List.generate(
           numDays,
           (i) => HeatMapContainer(
+            earliestHeatMapDate: earliestHeatMapDate,
             date: DateUtil.changeDay(startDate, i),
             backgroundColor: defaultColor,
             size: size,

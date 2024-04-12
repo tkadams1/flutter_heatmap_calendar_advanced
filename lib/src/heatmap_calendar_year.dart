@@ -82,6 +82,8 @@ class HeatMapCalendarYear extends StatefulWidget {
 
   final bool staticWeekdayLabels;
 
+  final bool segmented;
+
   /// Widgets which shown at left and right side of colorTip.
   ///
   /// First value is the left side widget and second value is the right side widget.
@@ -117,6 +119,7 @@ class HeatMapCalendarYear extends StatefulWidget {
     this.showText = false,
     this.showColorTip = true,
     this.scrollable = false,
+    this.segmented = true,
     this.colorTipHelper,
     this.colorTipAlignment,
     this.colorTipCount,
@@ -150,6 +153,12 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
 
   @override
   Widget build(BuildContext context) {
+    return widget.segmented
+        ? _segmentedHeatMapCalendarYear()
+        : _scrollableHeatmapCalendarYear();
+  }
+
+  Widget _scrollableHeatmapCalendarYear() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -196,6 +205,87 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
             alignment: widget.colorTipAlignment,
             size: widget.colorTipSize,
           ),
+      ],
+    );
+  }
+
+  Widget _segmentedHeatMapCalendarYear() {
+    DateTime segment1Start = DateTime(selectedYear, 1, 1);
+    DateTime segment1End = segment1Start.add(const Duration(days: 91));
+    DateTime segment2Start = segment1End;
+    DateTime segment2End = segment2Start.add(const Duration(days: 91));
+    DateTime segment3Start = segment2End;
+    DateTime segment3End = segment3Start.add(const Duration(days: 91));
+    DateTime segment4Start = segment3End;
+    DateTime segment4End = DateTime(selectedYear, 12, 31);
+
+    bool segment2Enabled = DateTime.now().isAfter(segment2Start);
+    bool segment3Enabled = DateTime.now().isAfter(segment3Start);
+    bool segment4Enabled = DateTime.now().isAfter(segment4Start);
+
+    return Expanded(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            // Heatmap Widget.
+            _header(),
+            _heatmapSegment(segment1Start, segment1End),
+            segment2Enabled
+                ? _heatmapSegment(segment2Start, segment2End)
+                : const SizedBox.shrink(),
+            segment3Enabled
+                ? _heatmapSegment(segment3Start, segment3End)
+                : const SizedBox.shrink(),
+            segment4Enabled
+                ? _heatmapSegment(segment4Start, segment4End)
+                : const SizedBox.shrink(),
+            // Show HeatMapColorTip if showColorTip is true.
+            if (widget.showColorTip == true)
+              HeatMapColorTip(
+                colorMode: widget.colorMode,
+                colorsets: widget.colorsets,
+                leftWidget: widget.colorTipHelper?[0],
+                rightWidget: widget.colorTipHelper?[1],
+                containerCount: widget.colorTipCount,
+                alignment: widget.colorTipAlignment,
+                size: widget.colorTipSize,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _heatmapSegment(DateTime startDate, DateTime endDate) {
+    return Row(
+      children: [
+        //This puts the week labels to the left of the heatmap regardless of scroll position
+        _staticWeekDayLabels(),
+        Expanded(
+          child: Container(
+            child: HeatMapPage(
+              endDate: selectedYear == DateTime.now().year
+                  ? DateTime.now()
+                  : endDate,
+              startDate: startDate,
+              colorMode: widget.colorMode,
+              size: widget.size,
+              fontSize: widget.fontSize,
+              datasets: widget.datasets,
+              defaultColor: widget.defaultColor,
+              textColor: widget.textColor,
+              colorsets: widget.colorsets,
+              borderRadius: widget.borderRadius,
+              onClick: widget.onClick,
+              margin: widget.margin,
+              showText: widget.showText,
+              staticWeekdayLabels: widget.staticWeekdayLabels,
+            ),
+          ),
+        ),
       ],
     );
   }

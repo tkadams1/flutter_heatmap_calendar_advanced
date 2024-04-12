@@ -106,6 +106,7 @@ class HeatMapCalendarRow extends StatelessWidget {
                   // start day of week value and end day of week.
                   //
                   // So we have to give every day information to each HeatMapContainer.
+                  earliestHeatMapDate: startDate,
                   date: DateTime(startDate.year, startDate.month,
                       startDate.day - startDate.weekday % 7 + i),
                   backgroundColor: defaultColor,

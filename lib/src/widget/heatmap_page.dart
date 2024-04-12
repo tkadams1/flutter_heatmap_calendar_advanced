@@ -116,6 +116,7 @@ class HeatMapPage extends StatelessWidget {
         //
         // To make empty space to future day, we have to pass this HeatMapPage's
         // endDate to HeatMapColumn's endDate.
+        earliestHeatMapDate: startDate,
         startDate: _firstDay,
         endDate: datePos <= _dateDifferent - 7
             ? DateUtil.changeDay(startDate, datePos + 6)
