@@ -20,6 +20,8 @@ class HeatMapColumn extends StatelessWidget {
   /// The Date value of the earliest date of the heatmap.
   final DateTime earliestHeatMapDate;
 
+  final bool isFirstColumn;
+
   /// The date value of first day of given week.
   final DateTime startDate;
 
@@ -85,6 +87,7 @@ class HeatMapColumn extends StatelessWidget {
     required this.colorMode,
     required this.numDays,
     this.size,
+    required this.isFirstColumn,
     this.fontSize,
     this.defaultColor,
     this.datasets,
@@ -155,6 +158,16 @@ class HeatMapColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return isFirstColumn ? _isFirstColumn() : _isNotFirstColumn();
+  }
+
+  Widget _isFirstColumn() {
+    return Column(
+      children: <Widget>[...emptySpace, ...dayContainers],
+    );
+  }
+
+  Widget _isNotFirstColumn() {
     return Column(
       children: <Widget>[...dayContainers, ...emptySpace],
     );

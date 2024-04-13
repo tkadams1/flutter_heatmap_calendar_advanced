@@ -114,6 +114,17 @@ class HeatMapPage extends StatelessWidget {
         break;
       }
 
+      int numDays = min(endDate.difference(_firstDay).inDays + 1, 7);
+      bool isFirstColumn = false;
+
+      // If _firstDay is before startDate, adjust numDays to exclude the dates before startDate
+      if (_firstDay.isBefore(startDate)) {
+        numDays -= startDate.difference(_firstDay).inDays;
+        _firstDay = startDate;
+        isFirstColumn = true;
+        print("numDays: $numDays, _firstDay: $_firstDay");
+      }
+
       columns.add(HeatMapColumn(
         // If last day is not saturday, week also includes future Date.
         // So we have to make future day on last column blanck.
@@ -121,12 +132,13 @@ class HeatMapPage extends StatelessWidget {
         // To make empty space to future day, we have to pass this HeatMapPage's
         // endDate to HeatMapColumn's endDate.
         earliestHeatMapDate: startDate,
+        isFirstColumn : isFirstColumn,
         startDate: _firstDay,
         endDate: datePos <= _dateDifferent - 7
             ? DateUtil.changeDay(startDate, datePos + 6)
             : endDate,
         colorMode: colorMode,
-        numDays: min(endDate.difference(_firstDay).inDays + 1, 7),
+        numDays: numDays,
         size: size,
         fontSize: fontSize,
         defaultColor: defaultColor,
