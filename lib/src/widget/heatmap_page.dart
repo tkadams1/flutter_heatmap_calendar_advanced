@@ -110,6 +110,10 @@ class HeatMapPage extends StatelessWidget {
       // Get first day of week by adding cursor's value to startDate.
       DateTime _firstDay = DateUtil.changeDay(startDate, datePos);
 
+      if (_firstDay.isAfter(endDate)) {
+        break;
+      }
+
       columns.add(HeatMapColumn(
         // If last day is not saturday, week also includes future Date.
         // So we have to make future day on last column blanck.

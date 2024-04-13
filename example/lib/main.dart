@@ -138,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
               staticWeekdayLabels: true,
               showColorTip: true,
               defaultColor: Colors.grey[200]!,
-              size: 18,
+              size: 20,
               colorTipAlignment: MainAxisAlignment.center,
               colorTipHelper: const [
                 Text(
