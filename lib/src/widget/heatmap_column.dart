@@ -150,7 +150,7 @@ class HeatMapColumn extends StatelessWidget {
                     width: size ?? 42,
                     height: size ?? 42),
               )
-            : [],
+            : [],    
         super(key: key);
 
   @override
