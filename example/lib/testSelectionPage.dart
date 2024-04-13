@@ -18,7 +18,10 @@ class _testSelectionPageState extends State<testSelectionPage> {
                   pageIndex = !pageIndex;
                 }),
             child: Text("Heatmap Calendar")),
-        pageIndex ? HeatmapCalendarMonthTest() : HeatmapCalendarYearTest(),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20.0, 0, 20, 0),
+          child: pageIndex ? HeatmapCalendarMonthTest() : HeatmapCalendarYearTest(),
+        ),
       ],
     );
   }
