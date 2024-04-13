@@ -281,7 +281,7 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
 
   Widget _header() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         // Previous month button.
         _buildPastIconButton(),
