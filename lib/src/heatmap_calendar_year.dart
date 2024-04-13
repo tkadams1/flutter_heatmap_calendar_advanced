@@ -211,12 +211,12 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
 
   Widget _segmentedHeatMapCalendarYear() {
     DateTime segment1Start = DateTime(selectedYear, 1, 1);
-    DateTime segment1End = segment1Start.add(const Duration(days: 91));
-    DateTime segment2Start = segment1End;
-    DateTime segment2End = segment2Start.add(const Duration(days: 91));
-    DateTime segment3Start = segment2End;
-    DateTime segment3End = segment3Start.add(const Duration(days: 91));
-    DateTime segment4Start = segment3End;
+    DateTime segment1End = DateTime(selectedYear, 4, 1).subtract(const Duration(days: 1));
+    DateTime segment2Start = DateTime(selectedYear, 4, 1);
+    DateTime segment2End = DateTime(selectedYear, 7, 1).subtract(const Duration(days: 1));
+    DateTime segment3Start = DateTime(selectedYear, 7, 1);
+    DateTime segment3End = DateTime(selectedYear, 10, 1).subtract(const Duration(days: 1));
+    DateTime segment4Start = DateTime(selectedYear, 10, 1);
     DateTime segment4End = DateTime(selectedYear, 12, 31);
 
     bool segment2Enabled = DateTime.now().isAfter(segment2Start);
@@ -267,9 +267,7 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
         Expanded(
           child: Container(
             child: HeatMapPage(
-              endDate: selectedYear == DateTime.now().year
-                  ? DateTime.now()
-                  : endDate,
+              endDate: endDate,
               startDate: startDate,
               colorMode: widget.colorMode,
               size: widget.size,

@@ -31,7 +31,7 @@ class HeatMapContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return date.isBefore(earliestHeatMapDate)
+    return date.isBefore(earliestHeatMapDate) || date.isAfter(DateTime.now())
         ? _buildEmptyHeatMapContainer()
         : _buildHeatMapContainer();
   }
