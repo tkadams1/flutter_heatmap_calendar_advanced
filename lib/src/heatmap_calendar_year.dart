@@ -119,7 +119,7 @@ class HeatMapCalendarYear extends StatefulWidget {
     this.showText = false,
     this.showColorTip = true,
     this.scrollable = false,
-    this.segmented = true,
+    this.segmented = false,
     this.colorTipHelper,
     this.colorTipAlignment,
     this.colorTipCount,

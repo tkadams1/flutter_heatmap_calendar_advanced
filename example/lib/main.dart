@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
               datasets: {DateTime.now(): 1},
               //flexible: true,
               showText: true,
-              scrollable: false,
+              scrollable: true,
               pastOnly: true,
               staticWeekdayLabels: true,
               showColorTip: true,
