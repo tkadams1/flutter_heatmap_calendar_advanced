@@ -317,4 +317,47 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
         : const SizedBox.shrink();
   }
 
+  Widget _buildForwardIconButton() {
+    if (widget.pastOnly && DateTime.now().year == selectedYear) {
+      return const Opacity(
+        opacity: 0.0,
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            size: 14,
+          ),
+          onPressed: null,
+        ),
+      );
+    }
+    return IconButton(
+      icon: const Icon(
+        Icons.arrow_forward_ios,
+        size: 14,
+      ),
+      onPressed: () => _changeYear(selectedYear + 1),
+    );
+  }
+
+  Widget _buildPastIconButton() {
+    if (widget.earliestYearToDisplay == selectedYear) {
+      return const Opacity(
+        opacity: 0.0,
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            size: 14,
+          ),
+          onPressed: null,
+        ),
+      );
+    }
+    return IconButton(
+      icon: const Icon(
+        Icons.arrow_back_ios,
+        size: 14,
+      ),
+      onPressed: () => _changeYear(selectedYear - 1),
+    );
+  }
 }
