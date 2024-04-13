@@ -9,7 +9,7 @@ class HeatmapCalendarYearTest extends StatelessWidget {
 
   Widget heatmapCalendarYear(context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(23, 0, 23, 0),
       child: Center(
         child: HeatMapCalendarYear(
           selectedYear: 2020,
