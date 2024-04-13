@@ -223,17 +223,20 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
     bool segment3Enabled = DateTime.now().isAfter(segment3Start);
     bool segment4Enabled = DateTime.now().isAfter(segment4Start);
 
-    return Expanded(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            // Heatmap Widget.
-            _header(),
-            _heatmapSegment(segment1Start, segment1End),
-            segment2Enabled
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        // Heatmap Widget.
+        _header(),
+        SizedBox(
+          height: 650,
+        
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _heatmapSegment(segment1Start, segment1End),
+                segment2Enabled
                 ? _heatmapSegment(segment2Start, segment2End)
                 : const SizedBox.shrink(),
             segment3Enabled
@@ -243,7 +246,12 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
                 ? _heatmapSegment(segment4Start, segment4End)
                 : const SizedBox.shrink(),
             // Show HeatMapColorTip if showColorTip is true.
-            if (widget.showColorTip == true)
+              ],
+            ),
+            
+          ),
+        ),
+        if (widget.showColorTip == true)
               HeatMapColorTip(
                 colorMode: widget.colorMode,
                 colorsets: widget.colorsets,
@@ -253,9 +261,7 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
                 alignment: widget.colorTipAlignment,
                 size: widget.colorTipSize,
               ),
-          ],
-        ),
-      ),
+      ],
     );
   }
 

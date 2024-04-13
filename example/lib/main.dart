@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:flutter_heatmap_example/heatmapCalendarYearTest.dart';
 
 void main() {
   runApp(const MyApp());
@@ -87,91 +88,52 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // HeatMapCalendar(
-            //   colorsets: const {
-            //     1: Color.fromARGB(20, 251, 43, 28),
-            //     2: Color.fromARGB(40, 251, 43, 28),
-            //     3: Color.fromARGB(60, 251, 43, 28),
-            //     4: Color.fromARGB(80, 251, 43, 28),
-            //     5: Color.fromARGB(100, 251, 43, 28),
-            //     6: Color.fromARGB(120, 251, 43, 28),
-            //     7: Color.fromARGB(150, 251, 43, 28),
-            //     8: Color.fromARGB(180, 251, 43, 28),
-            //     9: Color.fromARGB(210, 251, 43, 28),
-            //     10: Color.fromARGB(255, 251, 43, 28),
-            //   },
-            //   datasets:{DateTime.now(): 1}, 
-            //   initDate: DateTime.now(), 
-            //   showColorTip: true, colorTipHelper: 
-            //   [Text("Low Intensity"), Text("High Intensity")], 
-            //   colorTipCount: 10, colorTipSize: 20, 
-            //   onMonthChange: (value) {
-            //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.toString())));},),
-            HeatMapCalendarYear(
-              selectedYear: 2020,
-              earliestYearToDisplay:2019,
-              //monthFontSize: 24,
-              datasets: {DateTime.now(): 1},
-              //flexible: true,
-              showText: true,
-              scrollable: true,
-              pastOnly: true,
-              staticWeekdayLabels: true,
-              showColorTip: true,
-              defaultColor: Colors.grey[200]!,
-              size: 20,
-              colorTipAlignment: MainAxisAlignment.center,
-              colorTipHelper: const [
-                Text(
-                  "Low Intensity ",
-                ),
-                Text("  High Intensity"),
-              ],
-              colorsets: const {
-                1: Color.fromARGB(20, 251, 43, 28),
-                2: Color.fromARGB(40, 251, 43, 28),
-                3: Color.fromARGB(60, 251, 43, 28),
-                4: Color.fromARGB(80, 251, 43, 28),
-                5: Color.fromARGB(100, 251, 43, 28),
-                6: Color.fromARGB(120, 251, 43, 28),
-                7: Color.fromARGB(150, 251, 43, 28),
-                8: Color.fromARGB(180, 251, 43, 28),
-                9: Color.fromARGB(210, 251, 43, 28),
-                10: Color.fromARGB(255, 251, 43, 28),
-              },
-              onClick: (value) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(value.toString())));
-              },
-            ),
-            // const Text(
-            //   'You have pushed the button this many times:',
-            // ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headlineMedium,
-            // ),
-          ],
-        ),
+      body: Column(
+        // Column is also a layout widget. It takes a list of children and
+        // arranges them vertically. By default, it sizes itself to fit its
+        // children horizontally, and tries to be as tall as its parent.
+        //
+        // Column has various properties to control how it sizes itself and
+        // how it positions its children. Here we use mainAxisAlignment to
+        // center the children vertically; the main axis here is the vertical
+        // axis because Columns are vertical (the cross axis would be
+        // horizontal).
+        //
+        // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+        // action in the IDE, or press "p" in the console), to see the
+        // wireframe for each widget.
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Singl(child: HeatmapCalendarYearTest()),
+          // HeatMapCalendar(
+          //   colorsets: const {
+          //     1: Color.fromARGB(20, 251, 43, 28),
+          //     2: Color.fromARGB(40, 251, 43, 28),
+          //     3: Color.fromARGB(60, 251, 43, 28),
+          //     4: Color.fromARGB(80, 251, 43, 28),
+          //     5: Color.fromARGB(100, 251, 43, 28),
+          //     6: Color.fromARGB(120, 251, 43, 28),
+          //     7: Color.fromARGB(150, 251, 43, 28),
+          //     8: Color.fromARGB(180, 251, 43, 28),
+          //     9: Color.fromARGB(210, 251, 43, 28),
+          //     10: Color.fromARGB(255, 251, 43, 28),
+          //   },
+          //   datasets:{DateTime.now(): 1},
+          //   initDate: DateTime.now(),
+          //   showColorTip: true, colorTipHelper:
+          //   [Text("Low Intensity"), Text("High Intensity")],
+          //   colorTipCount: 10, colorTipSize: 20,
+          //   onMonthChange: (value) {
+          //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.toString())));},),
+      
+          // const Text(
+          //   'You have pushed the button this many times:',
+          // ),
+          // Text(
+          //   '$_counter',
+          //   style: Theme.of(context).textTheme.headlineMedium,
+          // ),
+        ],
       ),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: _incrementCounter,
