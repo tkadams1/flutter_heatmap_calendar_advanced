@@ -229,28 +229,16 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
       children: [
         // Heatmap Widget.
         _header(),
-        SizedBox(
-          height: 650,
-        
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _heatmapSegment(segment1Start, segment1End),
-                segment2Enabled
-                ? _heatmapSegment(segment2Start, segment2End)
-                : const SizedBox.shrink(),
-            segment3Enabled
-                ? _heatmapSegment(segment3Start, segment3End)
-                : const SizedBox.shrink(),
-            segment4Enabled
-                ? _heatmapSegment(segment4Start, segment4End)
-                : const SizedBox.shrink(),
-            // Show HeatMapColorTip if showColorTip is true.
-              ],
-            ),
-            
-          ),
-        ),
+        _heatmapSegment(segment1Start, segment1End),
+        segment2Enabled
+        ? _heatmapSegment(segment2Start, segment2End)
+        : const SizedBox.shrink(),
+                segment3Enabled
+        ? _heatmapSegment(segment3Start, segment3End)
+        : const SizedBox.shrink(),
+                segment4Enabled
+        ? _heatmapSegment(segment4Start, segment4End)
+        : const SizedBox.shrink(),
         if (widget.showColorTip == true)
               HeatMapColorTip(
                 colorMode: widget.colorMode,
@@ -267,28 +255,25 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
 
   Widget _heatmapSegment(DateTime startDate, DateTime endDate) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         //This puts the week labels to the left of the heatmap regardless of scroll position
         _staticWeekDayLabels(),
-        Expanded(
-          child: Container(
-            child: HeatMapPage(
-              endDate: endDate,
-              startDate: startDate,
-              colorMode: widget.colorMode,
-              size: widget.size,
-              fontSize: widget.fontSize,
-              datasets: widget.datasets,
-              defaultColor: widget.defaultColor,
-              textColor: widget.textColor,
-              colorsets: widget.colorsets,
-              borderRadius: widget.borderRadius,
-              onClick: widget.onClick,
-              margin: widget.margin,
-              showText: widget.showText,
-              staticWeekdayLabels: widget.staticWeekdayLabels,
-            ),
-          ),
+        HeatMapPage(
+          endDate: endDate,
+          startDate: startDate,
+          colorMode: widget.colorMode,
+          size: widget.size,
+          fontSize: widget.fontSize,
+          datasets: widget.datasets,
+          defaultColor: widget.defaultColor,
+          textColor: widget.textColor,
+          colorsets: widget.colorsets,
+          borderRadius: widget.borderRadius,
+          onClick: widget.onClick,
+          margin: widget.margin,
+          showText: widget.showText,
+          staticWeekdayLabels: widget.staticWeekdayLabels,
         ),
       ],
     );
@@ -332,47 +317,4 @@ class _HeatMapCalendarYearState extends State<HeatMapCalendarYear> {
         : const SizedBox.shrink();
   }
 
-  Widget _buildForwardIconButton() {
-    if (widget.pastOnly && DateTime.now().year == selectedYear) {
-      return const Opacity(
-        opacity: 0.0,
-        child: IconButton(
-          icon: Icon(
-            Icons.arrow_forward_ios,
-            size: 14,
-          ),
-          onPressed: null,
-        ),
-      );
-    }
-    return IconButton(
-      icon: const Icon(
-        Icons.arrow_forward_ios,
-        size: 14,
-      ),
-      onPressed: () => _changeYear(selectedYear + 1),
-    );
-  }
-
-  Widget _buildPastIconButton() {
-    if (widget.earliestYearToDisplay == selectedYear) {
-      return const Opacity(
-        opacity: 0.0,
-        child: IconButton(
-          icon: Icon(
-            Icons.arrow_forward_ios,
-            size: 14,
-          ),
-          onPressed: null,
-        ),
-      );
-    }
-    return IconButton(
-      icon: const Icon(
-        Icons.arrow_back_ios,
-        size: 14,
-      ),
-      onPressed: () => _changeYear(selectedYear - 1),
-    );
-  }
 }
