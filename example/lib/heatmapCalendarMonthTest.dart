@@ -19,23 +19,20 @@ class HeatmapCalendarMonthTest extends StatelessWidget {
         //showText: true,
         //scrollable: true,
         fontSize: 18,
+        pastOnly: true,
+        earliestYearToDisplay: 2023,
         showColorTip: true,
         colorTipCount: 10,
+        colorTipAlignment: MainAxisAlignment.center,
         colorTipSize: 15,
         defaultColor: Colors.grey[200]!,
         size: 45,
         colorTipHelper: const [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
-            child: Text(
-              "Low Intensity",
-              style: TextStyle(fontSize: 16),
-            ),
+          Text(
+            "Low Intensity  ",
+            style: TextStyle(fontSize: 14),
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-            child: Text("High Intensity", style: TextStyle(fontSize: 16)),
-          ),
+          Text("  High Intensity", style: TextStyle(fontSize: 14)),
         ],
         colorsets: const {
           1: Color.fromARGB(20, 251, 43, 28),

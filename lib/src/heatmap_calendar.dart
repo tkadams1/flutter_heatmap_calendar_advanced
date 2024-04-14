@@ -24,6 +24,12 @@ class HeatMapCalendar extends StatefulWidget {
   /// The date values of initial year and month.
   final DateTime? initDate;
 
+  /// Show only past months if value is true.
+  final bool pastOnly;
+
+  /// The earliest time to display in the calendar.
+  final int earliestYearToDisplay;
+
   /// The double value of every block's size.
   final double? size;
 
@@ -97,6 +103,8 @@ class HeatMapCalendar extends StatefulWidget {
     this.defaultColor,
     this.datasets,
     this.initDate,
+    this.earliestYearToDisplay = 2000,
+    this.pastOnly = false,
     this.size = 42,
     this.fontSize,
     this.monthFontSize,
@@ -142,19 +150,48 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
     if (widget.onMonthChange != null) widget.onMonthChange!(_currentDate!);
   }
 
-  /// Header widget which shows left, right buttons and year/month text.
+  // /// Header widget which shows left, right buttons and year/month text.
+  // Widget _header() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //     children: <Widget>[
+  //       // Previous month button.
+  //       IconButton(
+  //         icon: const Icon(
+  //           Icons.arrow_back_ios,
+  //           size: 14,
+  //         ),
+  //         onPressed: () => changeMonth(-1),
+  //       ),
+
+  //       // Text which shows the current year and month
+  //       Text(
+  //         DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
+  //             ' ' +
+  //             (_currentDate?.year).toString(),
+  //         style: TextStyle(
+  //           fontSize: widget.monthFontSize ?? 12,
+  //         ),
+  //       ),
+
+  //       // Next month button.
+  //       IconButton(
+  //         icon: const Icon(
+  //           Icons.arrow_forward_ios,
+  //           size: 14,
+  //         ),
+  //         onPressed: () => changeMonth(1),
+  //       ),
+  //     ],
+  //   );
+  // }
+
   Widget _header() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         // Previous month button.
-        IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 14,
-          ),
-          onPressed: () => changeMonth(-1),
-        ),
+        _buildPastIconButton(),
 
         // Text which shows the current year and month
         Text(
@@ -167,14 +204,55 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
         ),
 
         // Next month button.
-        IconButton(
-          icon: const Icon(
+        _buildForwardIconButton(),
+      ],
+    );
+  }
+
+   Widget _buildForwardIconButton() {
+    if (widget.pastOnly == true &&
+        _currentDate!.year  == DateTime.now().year &&
+        _currentDate!.month == DateTime.now().month) {
+      return const Opacity(
+        opacity: 0.0,
+        child: IconButton(
+          icon: Icon(
             Icons.arrow_forward_ios,
             size: 14,
           ),
-          onPressed: () => changeMonth(1),
+          onPressed: null,
         ),
-      ],
+      );
+    }
+    return IconButton(
+      icon: const Icon(
+        Icons.arrow_forward_ios,
+        size: 14,
+      ),
+      onPressed: () => changeMonth(1),
+    );
+  }
+
+  Widget _buildPastIconButton() {
+    if (widget.earliestYearToDisplay == _currentDate!.year &&
+        _currentDate!.month == 1) {
+      return const Opacity(
+        opacity: 0.0,
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            size: 14,
+          ),
+          onPressed: null,
+        ),
+      );
+    }
+    return IconButton(
+      icon: const Icon(
+        Icons.arrow_back_ios,
+        size: 14,
+      ),
+      onPressed: () => changeMonth(-1),
     );
   }
 
