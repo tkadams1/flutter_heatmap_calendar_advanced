@@ -87,6 +87,9 @@ class HeatMapCalendar extends StatefulWidget {
   /// The double value of [HeatMapColorTip]'s tip container's size.
   final double? colorTipSize;
 
+  /// The alignment value of [HeatMapColorTip]'s tip container.
+  final MainAxisAlignment? colorTipAlignment;
+
   const HeatMapCalendar({
     Key? key,
     required this.colorsets,
@@ -108,6 +111,7 @@ class HeatMapCalendar extends StatefulWidget {
     this.showColorTip = true,
     this.colorTipHelper,
     this.colorTipCount,
+    this.colorTipAlignment,
     this.colorTipSize,
   }) : super(key: key);
 
@@ -235,6 +239,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
               colorsets: widget.colorsets,
               leftWidget: widget.colorTipHelper?[0],
               rightWidget: widget.colorTipHelper?[1],
+              alignment: widget.colorTipAlignment,
               containerCount: widget.colorTipCount,
               size: widget.colorTipSize,
             ),
